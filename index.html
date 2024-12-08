@@ -543,14 +543,18 @@
                     if (result) {
                         this.modalWebpUrl = result.webpUrl;
                         this.modalConvertedSize = result.convertedSize;
-                        this.saveModalImage();
+                        // Remove the following line to prevent the modal from closing
+                        // this.closeModal();
                     }
                 },
 
                 saveModalImage() {
                     this.convertedFiles[this.modalIndex].webpUrl = this.modalWebpUrl;
                     this.convertedFiles[this.modalIndex].convertedSize = this.modalConvertedSize;
-                    this.closeModal();
+                    this.convertedFiles[this.modalIndex].resolutionMultiplier = this.modalResolutionMultiplier;
+                    this.convertedFiles[this.modalIndex].quality = this.modalQuality;
+                    // Remove the following line to prevent the modal from closing
+                    // this.closeModal();
                 },
                 async refreshImage(index) {
                     const file = this.files[index];
@@ -588,7 +592,7 @@
                 },
 
                 handleAdditionalFiles(event) {
-                    const newFiles = Array.from(event.target.files).filter(file => file.type === 'image/svg+xml');
+                    const newFiles = Array.from(event.target.files).filter(file => file.type=== 'image/svg+xml');
                     this.files = [...newFiles, ...this.files];
                     this.convertAllToWebP();
                 }
